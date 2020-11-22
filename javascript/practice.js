@@ -1,23 +1,19 @@
-/*
-  A practice file to simply practice a pattern
-*/
-
-let mySingleton =(function(){
+let mySingleton = (function(){
  let instance;
- function init(){
-   let privateVariable ="Its a private string";
-   let privateRandomNumber=Math.random();
-   return{
-      publicProperty:"A public Property",
-      publicMethod:function(){
-        console.log("Public method accesses a private string"+privateVar);
+  function init(){
+    let privateVar = 10;
+    function privateRandomNumber(){
+      return Math.random();
+    }
+    return{
+      getPublicNumber:function(){
+        return privateVar;
       },
-      publicRandomNumber:function(){
-        console.log("Private Random number");
-        return privateRandomNumber;
+      getPublicRandomNumber:function(){
+        return privateRandomNumber();
       }
-   }
- }
+    }
+  }
   return{
     getInstance:function(){
        if(!instance){
@@ -26,10 +22,10 @@ let mySingleton =(function(){
        return instance;
     }
   }
-
 })();
 
-let a = mySingleton.getInstance();
-let b = mySingleton.getInstance();
-console.log(a.publicRandomNumber());
-console.log(b.publicRandomNumber());
+let a =mySingleton.getInstance();
+let b =mySingleton.getInstance();
+console.log(a.getPublicNumber());
+console.log(a.getPublicRandomNumber());
+console.log(b.getPublicRandomNumber());
